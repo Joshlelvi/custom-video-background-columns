@@ -1,0 +1,319 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+  /* Hero Video */
+.outter.hero-video {
+  width: 100%;
+  height: 650px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+@media (max-width: 767px) {
+  .outter.hero-video {
+    height: 325px;
+  }
+.rightside .outter, .rightside .outter .video-container {
+    height: max-content;
+}
+
+}
+
+.hero-video .video-container {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+@media (max-width: 767px) {
+  .hero-video .video-container {
+    height: 325px;
+  }
+}
+.hero-video video {
+  -o-object-fit: cover;
+     object-fit: cover;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+@media (max-width: 767px) {
+  .hero-video video {
+    height: 325px;
+  }
+}
+.hero-video .video-container:after {
+  content: "";
+  display: block;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+.hero-video .heading {
+  margin: 0 0 1rem;
+  padding: 0;
+  font-size:{{ section.settings.headingtextsize }}px;
+color: {{ section.settings.headingcolor }};
+}
+@media (max-width: 767px) {
+  .hero-video h1 {
+    font-size: 32px;
+  }
+}
+@media (min-width: 768px) {
+  .hero-video h1 {
+    font-size: 52px;
+  }
+}
+.hero-video .desc {
+  color: {{ section.settings.subheadingcolor }};
+  font-weight: 400;
+  margin-bottom: 20px;
+  font-size:{{ section.settings.subheadingtextsize }}px;;
+}
+.hero-video .callout {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  text-align: center;
+  position: relative;
+  z-index: 10;
+  width: 70%;
+  margin: auto;
+}
+@media (max-width: 767px) {
+  .hero-video .callout {
+    width: 90%;
+  }
+}
+.hero-video .button {
+  text-transform: uppercase;
+  background-color: transparent;
+  border-radius: 0px;
+  margin-top: 20px;
+  background-color: #000;
+  padding: 15px 30px;
+  border-radius: 0px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.7s;
+}
+@media (max-width: 767px) {
+  .hero-video .button {
+    padding: 10px 20px;
+  }
+}
+.hero-video .button:hover {
+  cursor: pointer;
+  background-color: #fff;
+  color:#000;
+}
+
+.leftside, .rightside {
+  color: rgba(255,255,255,.4);
+  text-align: left;
+  margin: 10px;
+}
+
+@media ( min-width : 600px ){
+
+	.flexbox {
+    gap: 10px;
+    margin:0 5%;
+    display: -webkit-flex;
+    display: flex;
+	}
+  .leftside,
+  .rightside {
+    -webkit-flex: 1;
+    flex: 1;
+    background: none;
+  }
+}
+{%- endstyle -%}
+
+<div class="flexbox">
+  <div class="leftside">
+           <section class="outter hero-video">
+          <section class="video-container">
+            <video src="{{ section.settings.video1 }}" autoplay loop playsinline muted></video>
+            <div class="callout">
+              <h1 class="heading">{{ section.settings.leftheading }}</h1>
+              <div class="desc">{{ section.settings.leftsubheading }}</div>
+              <div style="display:none;">
+              <a class="btn btn--primary call-to-action"  href="{{ section.settings.left_button_link | url }}">{{ section.settings.leftbtnlable }}</a>
+              </div>
+              </div>
+          
+          </section>
+          </section>
+
+  </div>
+  <div class="rightside">
+             <section class="outter hero-video">
+            <section class="video-container">
+              <video src="{{ section.settings.video2 }}" autoplay loop playsinline muted></video>
+              <div class="callout">
+                <div class="desc">{{ section.settings.firstsubheading }}</div>
+                <h1 class="heading">{{ section.settings.rightheading }}</h1>
+                <div class="desc">{{ section.settings.rightsubheading }}</div>
+                <a class="btn btn--primary call-to-action" href="{{ section.settings.right_button_link | url }}">{{ section.settings.rightbtnlable }}</a>
+              </div>
+            
+            </section>
+            </section>
+ 
+  </div>
+</div>
+
+
+{% schema %}
+{
+  "name": "Two Video Columns",
+  "class": "section",
+  "settings": [
+
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    },
+        {
+      "type": "text",
+      "id": "video1",
+      "label": "Select Left video"
+    },
+    {
+      "type": "text",
+      "id": "leftheading",
+      "default": "Left Heading",
+      "label": "Enter Left Heading"
+    },
+    {
+      "type": "text",
+      "id": "leftsubheading",
+      "default": "Left sub text",
+      "label": "Enter Left sub text"
+    },
+    {
+      "type": "text",
+      "id": "leftbtnlable",
+      "default": "SHOP",
+      "label": "Enter Left Button Label"
+    },
+    {
+      "type": "url",
+      "id": "left_button_link",
+      "label": "Left Button Link"
+    }, 
+    {
+      "type": "text",
+      "id": "firstsubheading",
+      "default": "Right sub Text",
+      "label": "Enter Right sub text"
+    },
+    {
+      "type": "text",
+      "id": "rightheading",
+      "default": "Right Heading",
+      "label": "Enter Right Heading"
+    },
+    {
+      "type": "text",
+      "id": "rightsubheading",
+      "default": "Right sub Text",
+      "label": "Enter Right sub text"
+    },
+    {
+      "type": "text",
+      "id": "rightbtnlable",
+      "default": "SHOP",
+      "label": "Enter Left Button Label"
+    },
+    {
+      "type": "url",
+      "id": "right_button_link",
+      "label": "right Button Link"
+    },
+    {
+      "type": "text",
+      "id": "video2",
+      "label": "Select Right video"
+    },
+    
+    {
+      "type": "range",
+      "id": "headingtextsize",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Font Size For Heading",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "subheadingtextsize",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Sub Heading Font Size",
+      "default": 12
+    },{
+      "type": "color",
+      "id": "headingcolor",
+      "label": "Heading color",
+      "default": "#000"
+    },{
+      "type": "color",
+      "id": "subheadingcolor",
+      "label": "Sub heading color",
+      "default": "#000"
+    }
+    
+  ],
+  "presets": [
+    {
+      "name": "Two Video Columns"
+      }
+  ]
+}
+{% endschema %}
+
+
+
+
